@@ -1,19 +1,22 @@
 extends KinematicBody
 
-export (float) var moveSpeed
-export (float) var jumpForce
-export (float) var gravity
-export (float) var maxFallSpeed
+export (float) var moveSpeed    : float
+export (float) var jumpForce    : float
+export (float) var gravity      : float
+export (float) var maxFallSpeed : float
+export (float) var drag         : float
 
-export (float) var vLookSensitivity
-export (float) var hLookSensitivity
+export (float) var vLookSensitivity : float
+export (float) var hLookSensitivity : float
 
 # Points up
 const Y_AXIS := Vector3(0, 1, 0)
 
 onready var camBase := $CameraBase as Spatial
 
-var yVelocity := 0.0
+var yVelocity  := 0.0
+var doubleJump := false
+var velocity   := Vector3()
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
@@ -44,23 +47,25 @@ func _physics_process(delta : float) -> void:
 	moveVec *= moveSpeed
 	moveVec.y = yVelocity
 	
-	move_and_slide(moveVec, Y_AXIS)
-	
+	velocity = lerp(velocity, moveVec, drag)
+	move_and_slide(velocity, Y_AXIS)
 	
 	var onFloor    : bool = is_on_floor()
-	var justJumped : bool = false
 	
 	yVelocity -= gravity
 	
 	if (onFloor and Input.is_action_just_pressed("jump")):
-		justJumped = true
-		yVelocity = jumpForce
+		yVelocity  = jumpForce
+	elif (Input.is_action_just_pressed("jump") and not onFloor and not doubleJump):
+		yVelocity  = jumpForce
+		doubleJump = true
 	elif (onFloor and yVelocity <= 0):
-		yVelocity = -0.1
-		
+		yVelocity  = -0.1
+		doubleJump = false
+	
 	if (yVelocity < -maxFallSpeed):
 		yVelocity = -maxFallSpeed
-	
+		
 	return
 
 func _input(event : InputEvent) -> void:
