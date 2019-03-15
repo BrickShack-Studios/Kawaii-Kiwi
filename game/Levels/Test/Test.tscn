@@ -17,6 +17,7 @@ points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1,
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.999879, -0.00756717, 0.0136212, 0.00331415, 0.750883, 0.660427, -0.0152255, 0.660392, -0.750767, 0, 25.1689, 0 )
+light_color = Color( 1, 0.996078, 0.8, 1 )
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -548,6 +549,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 3 )
 
 [node name="Platforms" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="MeshInstance2" type="MeshInstance" parent="Platforms"]
 editor/display_folded = true

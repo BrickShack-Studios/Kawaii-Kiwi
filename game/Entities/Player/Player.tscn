@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Player/kawaiikiwiNOIKRIG.glb" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
-
-[sub_resource type="SpatialMaterial" id=5]
-albedo_color = Color( 0, 0.764706, 1, 1 )
-
-[sub_resource type="CapsuleMesh" id=2]
-material = SubResource( 5 )
-radial_segments = 14
+radius = 1.44113
+height = 0.002
 
 [sub_resource type="ProceduralSky" id=4]
 
@@ -18,9 +14,153 @@ background_mode = 2
 background_sky = SubResource( 4 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 
+[sub_resource type="Animation" id=10]
+resource_name = "falling"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scene Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 180, 180, 0 ), Vector3( 359.9, 180, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scene Root:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( -5, 180, 0 ), Vector3( 0, 180, 0 ), Vector3( 5, 180, 0 ), Vector3( 0, 180, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "jump"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scene Root:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 180, 180, 0 ), Vector3( 359.9, 180, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "run"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scene Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 45 ), Vector3( 0, 180, -45 ), Vector3( 0, 180, 45 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "walk"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scene Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 45 ), Vector3( 0, 180, -45 ), Vector3( 0, 180, 45 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "falling"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "run"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachine" id=6]
+states/falling/node = SubResource( 13 )
+states/falling/position = Vector2( 551, 50 )
+states/idle/node = SubResource( 8 )
+states/idle/position = Vector2( 373, 50 )
+states/jump/node = SubResource( 14 )
+states/jump/position = Vector2( 551, 157 )
+states/run/node = SubResource( 15 )
+states/run/position = Vector2( 373, 243 )
+states/walk/node = SubResource( 16 )
+states/walk/position = Vector2( 373, 157 )
+transitions = [ "idle", "walk", SubResource( 17 ), "walk", "idle", SubResource( 18 ), "idle", "jump", SubResource( 19 ), "walk", "jump", SubResource( 20 ), "walk", "run", SubResource( 21 ), "jump", "falling", SubResource( 22 ), "falling", "jump", SubResource( 23 ), "run", "jump", SubResource( 24 ), "jump", "idle", SubResource( 25 ), "jump", "walk", SubResource( 26 ), "jump", "run", SubResource( 27 ), "falling", "idle", SubResource( 28 ) ]
+start_node = "idle"
+graph_offset = Vector2( 81, 3 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=7]
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 moveSpeed = 12.0
+speedPercent = 1.0
 jumpForce = 30.0
 gravity = 0.98
 maxFallSpeed = 30.0
@@ -29,20 +169,35 @@ vLookSensitivity = 0.4
 hLookSensitivity = 0.4
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 1.41284, 0 )
 shape = SubResource( 1 )
-
-[node name="Mesh" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
 
 [node name="CameraBase" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="CameraBase"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+transform = Transform( 1, 0, 0, 0, 0.983849, 0.179001, 0, -0.179001, 0.983849, 0, 4.72815, 11.6415 )
 environment = SubResource( 3 )
 current = true
 fov = 90.0
 far = 500.0
 
+[node name="Scene Root" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, -1.84216e-09, -8.74034e-08, 0, 0.999778, -0.0210719, 8.74228e-08, -0.0210719, -0.999778, 0, 0, 0 )
+
+[node name="KiwiRig" parent="Scene Root" index="2"]
+editor/display_folded = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/falling = SubResource( 10 )
+anims/idle = SubResource( 5 )
+anims/jump = SubResource( 11 )
+anims/run = SubResource( 12 )
+anims/walk = SubResource( 9 )
+
+[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
+tree_root = SubResource( 6 )
+anim_player = NodePath("..")
+parameters/playback = SubResource( 7 )
+
+
+[editable path="Scene Root"]
