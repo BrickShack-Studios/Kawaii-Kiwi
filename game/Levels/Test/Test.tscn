@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entities/Barrel/Barrel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/Floaty/Floaty.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.505882, 0.505882, 0.505882, 1 )
@@ -24,7 +26,6 @@ shadow_enabled = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.7331, 0, 60.5228 )
 
 [node name="Floor" type="MeshInstance" parent="."]
-editor/display_folded = true
 transform = Transform( 68.7508, 0, 0, 0, 1, 0, 0, 0, 72.2144, 0, -3.17479, 0 )
 mesh = SubResource( 2 )
 material/0 = null
@@ -682,4 +683,75 @@ material/0 = SubResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="Platforms/MeshInstance12/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 3 )
+
+[node name="Barrels" type="Spatial" parent="."]
+editor/display_folded = true
+
+[node name="Barrel" parent="Barrels" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.7883, -1.11009, 37.5959 )
+
+[node name="Barrel2" parent="Barrels" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9437, -1.11009, 37.5959 )
+
+[node name="Barrel3" parent="Barrels" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.1598, -1.11009, 37.5959 )
+
+[node name="Barrel4" parent="Barrels" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0314, 0.970001, 37.5959 )
+
+[node name="Barrel5" parent="Barrels" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.7963, 0.970001, 37.5959 )
+
+[node name="Barrel6" parent="Barrels" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9889, 3.02752, 37.5959 )
+
+[node name="Floaties" type="Spatial" parent="."]
+
+[node name="Floaty" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1724, -0.251895, 48.4929 )
+
+[node name="Floaty2" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61502, -0.251895, 48.4929 )
+
+[node name="Floaty3" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61502, -0.251895, 25.7407 )
+
+[node name="Floaty4" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.33, -0.251895, 25.7407 )
+
+[node name="Floaty5" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0789, 20.0426, -28.2587 )
+
+[node name="Floaty6" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.774, 20.0426, -28.2587 )
+
+[node name="Floaty7" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.2936, 20.0426, -28.2587 )
+
+[node name="Floaty8" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.3098, 20.0426, -28.2587 )
+
+[node name="Floaty9" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.3098, 20.0426, -31.3707 )
+
+[node name="Floaty10" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3865, 20.0426, -31.3707 )
+
+[node name="Floaty11" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.378, 20.0426, -31.3707 )
+
+[node name="Floaty12" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.7452, 20.0426, -31.3707 )
+
+[node name="Floaty13" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.7452, 20.0426, -34.5934 )
+
+[node name="Floaty14" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5442, 20.0426, -34.5934 )
+
+[node name="Floaty15" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.768, 20.0426, -34.5934 )
+
+[node name="Floaty16" parent="Floaties" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.3152, 20.0426, -34.5934 )
 

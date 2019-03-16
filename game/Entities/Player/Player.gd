@@ -49,11 +49,9 @@ func _physics_process(delta : float) -> void:
 	moveVec = moveVec.rotated(Y_AXIS, rotation.y)
 	
 	var runMod := 1.0
+	
 	if (Input.is_action_pressed("run")):
 		runMod += speedPercent
-		playAnimation("run")
-	elif (velocity.length() > 0.11): playAnimation("walk")
-	elif (velocity.length() < 0.11): playAnimation("idle")
 	
 	moveVec *= moveSpeed * runMod
 	moveVec.y = yVelocity
@@ -64,6 +62,9 @@ func _physics_process(delta : float) -> void:
 	var onFloor    : bool = is_on_floor()
 	
 	if (not onFloor): playAnimation("falling")
+	elif (velocity.length() > 0.11 and runMod > 1): playAnimation("run")
+	elif (velocity.length() > 0.11): playAnimation("walk")
+	elif (velocity.length() < 0.11): playAnimation("idle")
 	
 	yVelocity -= gravity
 	
@@ -97,6 +98,8 @@ func playAnimation(a : String) -> void:
 		animPlayback.travel(a)
 	else:
 		if (animPlayback.get_current_node() != a):
+			if (animPlayback.get_current_node() == "falling" and a != "jump"):
+					$Sounds/Landing.play()
 			animPlayback.travel(a)
 	
 	return

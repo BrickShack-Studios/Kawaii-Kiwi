@@ -1,7 +1,11 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Entities/Player/kawaiikiwiNOIKRIG.glb" type="PackedScene" id=2]
+[ext_resource path="res://Entities/Player/jumping_1.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Entities/Player/footstep_1.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Entities/Player/footstep_2.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Entities/Player/landing_2.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.44113
@@ -16,6 +20,7 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Animation" id=10]
 resource_name = "falling"
+length = 2.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -25,7 +30,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
+"times": PoolRealArray( 0, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 180, 0 ), Vector3( 180, 180, 0 ), Vector3( 359.9, 180, 0 ) ]
@@ -64,6 +69,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 180, 0 ), Vector3( 180, 180, 0 ), Vector3( 359.9, 180, 0 ) ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Sounds/Jump")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 1.64612,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "run"
@@ -82,6 +101,24 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 180, 45 ), Vector3( 0, 180, -45 ), Vector3( 0, 180, 45 ) ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Sounds/Footsteps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 1.67623,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 1.70133,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0, 0.25 )
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "walk"
@@ -97,6 +134,24 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 180, 45 ), Vector3( 0, 180, -45 ), Vector3( 0, 180, 45 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Sounds/Footsteps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 1.68125,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 1.64612,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0, 0.5 )
 }
 
 [sub_resource type="AnimationNodeAnimation" id=13]
@@ -140,20 +195,28 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
 [sub_resource type="AnimationNodeStateMachine" id=6]
 states/falling/node = SubResource( 13 )
-states/falling/position = Vector2( 551, 50 )
+states/falling/position = Vector2( 698, 50 )
 states/idle/node = SubResource( 8 )
 states/idle/position = Vector2( 373, 50 )
 states/jump/node = SubResource( 14 )
-states/jump/position = Vector2( 551, 157 )
+states/jump/position = Vector2( 698, 243 )
 states/run/node = SubResource( 15 )
 states/run/position = Vector2( 373, 243 )
 states/walk/node = SubResource( 16 )
-states/walk/position = Vector2( 373, 157 )
-transitions = [ "idle", "walk", SubResource( 17 ), "walk", "idle", SubResource( 18 ), "idle", "jump", SubResource( 19 ), "walk", "jump", SubResource( 20 ), "walk", "run", SubResource( 21 ), "jump", "falling", SubResource( 22 ), "falling", "jump", SubResource( 23 ), "run", "jump", SubResource( 24 ), "jump", "idle", SubResource( 25 ), "jump", "walk", SubResource( 26 ), "jump", "run", SubResource( 27 ), "falling", "idle", SubResource( 28 ) ]
+states/walk/position = Vector2( 373, 148 )
+transitions = [ "idle", "walk", SubResource( 17 ), "walk", "idle", SubResource( 18 ), "idle", "jump", SubResource( 19 ), "walk", "jump", SubResource( 20 ), "walk", "run", SubResource( 21 ), "jump", "falling", SubResource( 22 ), "falling", "jump", SubResource( 23 ), "run", "jump", SubResource( 24 ), "jump", "idle", SubResource( 25 ), "jump", "walk", SubResource( 26 ), "jump", "run", SubResource( 27 ), "falling", "idle", SubResource( 28 ), "falling", "walk", SubResource( 29 ), "falling", "run", SubResource( 30 ), "walk", "falling", SubResource( 31 ), "run", "falling", SubResource( 32 ) ]
 start_node = "idle"
-graph_offset = Vector2( 81, 3 )
+graph_offset = Vector2( 214, 13 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=7]
 
@@ -182,7 +245,7 @@ fov = 90.0
 far = 500.0
 
 [node name="Scene Root" parent="." instance=ExtResource( 2 )]
-transform = Transform( -1, -1.84216e-09, -8.74034e-08, 0, 0.999778, -0.0210719, 8.74228e-08, -0.0210719, -0.999778, 0, 0, 0 )
+transform = Transform( -1, 7.6194e-09, -8.70901e-08, 0, 0.996195, 0.0871557, 8.74228e-08, 0.0871557, -0.996195, 0, 0, 0 )
 
 [node name="KiwiRig" parent="Scene Root" index="2"]
 editor/display_folded = true
@@ -198,6 +261,20 @@ anims/walk = SubResource( 9 )
 tree_root = SubResource( 6 )
 anim_player = NodePath("..")
 parameters/playback = SubResource( 7 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 4 )
+unit_size = 10.0
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 3 )
+unit_size = 10.0
+
+[node name="Landing" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 6 )
+unit_size = 10.0
 
 
 [editable path="Scene Root"]
